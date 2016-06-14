@@ -134,11 +134,6 @@ public class HashMap<K,V> {
         return size;
     }
 
-    private void putToTable(K key,V value,Node<K,V>[] table)
-    {
-
-    }
-
     public void put(K key,V value)
     {
         int position=position(key);
@@ -166,21 +161,12 @@ public class HashMap<K,V> {
 
     public V get(K key)
     {
-        int position=position(key);
+        Node<K,V> node=getNode(key);
 
-        Node<K,V> p=table[position];
-
-        while(p!=null)
-        {
-            if(p.pair.key.equals(key))
-                return p.pair.value;
-            p=p.next;
-        }
-
-        return null;
+        return (node==null)?null:node.pair.value;
     }
 
-    public boolean containsKey(K key)
+    private Node<K,V> getNode(K key)
     {
         int position=position(key);
 
@@ -189,11 +175,16 @@ public class HashMap<K,V> {
         while(p!=null)
         {
             if(p.pair.key.equals(key))
-                return true;
+                return p;
             p=p.next;
         }
 
-        return false;
+        return null;
+    }
+
+    public boolean containsKey(K key)
+    {
+        return getNode(key)!=null;
     }
 
     public V remove(K key)
@@ -239,6 +230,10 @@ public class HashMap<K,V> {
         size=0;
     }
 
+    /*
+    if the size of the HashMap reaches the threshold,
+    then rehash the entire HashMap to guarantee its speed
+     */
     public void rehash()
     {
         capacity*=2;
@@ -266,11 +261,19 @@ public class HashMap<K,V> {
         oldTable=null;
     }
 
+    /*
+    Get the hash value of an object.
+    In case the hashCode() might return a negative integer,
+    this method return the absolute value of it
+     */
     private int hash(Object obj)
     {
         return Math.abs(obj.hashCode());
     }
 
+    /*
+    return the position at where a node with certain key is hashed in the table
+     */
     private int position(K key)
     {
         return hash(key)%capacity;
