@@ -12,7 +12,6 @@ public class HashMap<K,V> {
     private int size;//the number of pairs in the HashMap
     private int capacity;//length of the table
     private double loadFactor;
-    private int used;//number of non-null items in the table
     private int threshold;//capacity*loadfactor
 
     Node<K,V>[] table;
@@ -121,7 +120,6 @@ public class HashMap<K,V> {
         this.capacity=capacity;
         this.loadFactor=loadFactor;
         this.size=0;
-        this.used=0;
         this.threshold=(int)(capacity*loadFactor);
         this.table=new Node[this.capacity];
     }
@@ -161,10 +159,8 @@ public class HashMap<K,V> {
         node.next=table[position];
         table[position]=node;
         size++;
-        if(table[position].next==null)
-            used++;
 
-        if(used>=threshold)
+        if(size>=threshold)
             rehash();
     }
 
@@ -215,7 +211,6 @@ public class HashMap<K,V> {
                 table[position]=p.next;
                 p.next=null;
                 size--;
-                used--;
                 return p.pair.value;
             }
 
@@ -248,7 +243,6 @@ public class HashMap<K,V> {
     {
         capacity*=2;
         size=0;
-        used=0;
         threshold=(int)(capacity*loadFactor);
 
         Node[] oldTable=table;
