@@ -153,9 +153,8 @@ public class HashMap<K,V> {
         Node<K,V> node=new Node<K,V>(key,value);
         node.next=table[position];
         table[position]=node;
-        size++;
 
-        if(size>=threshold)
+        if(++size>=threshold)
             rehash();
     }
 
@@ -185,6 +184,22 @@ public class HashMap<K,V> {
     public boolean containsKey(K key)
     {
         return getNode(key)!=null;
+    }
+
+    public boolean containsValue(Object value)
+    {
+        if(table!=null&&size>0)
+        {
+            for(Node<K,V> node:table)
+            {
+                for(Node<K,V> p=node;p!=null;p=p.next)
+                    if(p.pair.value==value
+                            ||p.pair.value.equals(value))
+                        return true;
+            }
+        }
+
+        return false;
     }
 
     public V remove(K key)
