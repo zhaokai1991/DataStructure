@@ -9,20 +9,22 @@ import java.util.Stack;
  */
 
 
-class TreeNode{
-    int val;
-    TreeNode left;
-    TreeNode right;
 
-    public TreeNode(int val)
-    {
-        this.val=val;
-        left=null;
-        right=null;
-    }
-}
 
 public class Tree {
+
+    static class TreeNode{
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val)
+        {
+            this.val=val;
+            left=null;
+            right=null;
+        }
+    }
 
     TreeNode root;
 
