@@ -245,9 +245,9 @@ public class HashMap<K,V> {
         size=0;
     }
 
-    /*
-    if the size of the HashMap reaches the threshold,
-    then rehash the entire HashMap to guarantee its speed
+    /**
+     * if the size of the HashMap reaches the threshold,
+     * then rehash the entire HashMap to guarantee its speed
      */
     public void rehash()
     {
@@ -276,18 +276,23 @@ public class HashMap<K,V> {
         oldTable=null;
     }
 
-    /*
-    Get the hash value of an object.
-    In case the hashCode() might return a negative integer,
-    this method return the absolute value of it
+    /**
+     * Get the hash value of an object,
+     * In case the hashCode() might return a negative integer,
+     * this method return the absolute value of it
+     *
+     * @param obj target object
+     * @return the hash value of obj
      */
     private int hash(Object obj)
     {
         return Math.abs(obj.hashCode());
     }
 
-    /*
-    return the position at where a node with certain key is hashed in the table
+    /**
+     * to compute the position at where a node with certain key is hashed in the table
+     * @param key
+     * @return the index at where K key is hashed in the table
      */
     private int position(K key)
     {

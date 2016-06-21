@@ -1,5 +1,7 @@
 package util;
 
+import java.util.ArrayList;
+
 /**
  * Created by Zhaokai on 2016/6/15.
  */
@@ -32,6 +34,12 @@ public class AVLTree {
         root=null;
     }
 
+    /**
+     * insert a new AVLNode with certain value into a sub-tree
+     * @param val the value to be inserted
+     * @param root the root AVLNode of a sub-tree
+     * @return the new root AVLNode of the sub-tree
+     */
     private AVLNode insert(int val,AVLNode root)
     {
         if(root==null)
@@ -80,8 +88,15 @@ public class AVLTree {
             return -1;
         else
             return node.height;
+
+        ArrayList
     }
 
+    /**
+     * rotate an AVLNode with its left child
+     * @param a the AVLNode to rotate
+     * @return the new root AVLNode of the sub-tree
+     */
     private AVLNode singleRotateWithLeft(AVLNode a)
     {
         AVLNode b=a.left;
@@ -105,7 +120,7 @@ public class AVLTree {
 
         return b;
     }
-
+    
     private AVLNode doubleRotateWithLeft(AVLNode a)
     {
         a.left=singleRotateWithRight(a.left);
