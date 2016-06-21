@@ -88,8 +88,6 @@ public class AVLTree {
             return -1;
         else
             return node.height;
-
-        ArrayList
     }
 
     /**
