@@ -1,9 +1,11 @@
 package util;
 
+import api.List;
+
 /**
  * Created by zhaokai on 16-6-21.
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements List<T>{
 
     static class ListNode<T>
     {
@@ -36,6 +38,7 @@ public class LinkedList<T> {
         size=0;
     }
 
+    @Override
     public void add(T value)
     {
         addLast(value);
@@ -65,10 +68,11 @@ public class LinkedList<T> {
         size++;
     }
 
-    public void insert(T value,int index)
+    @Override
+    public void insert(int index,T value)
     {
-        if(index>size)
-            throw new IllegalArgumentException("maximum available index is "+size);
+        if(index>size||index<0)
+            throw new IllegalArgumentException("index "+index+" is inavailable");
 
         if(index==0)
         {
@@ -90,6 +94,20 @@ public class LinkedList<T> {
         next.previous=newNode;
 
         size++;
+    }
+
+    @Override
+    public T remove(int index)
+    {
+        ListNode<T> p=getNode(index);
+
+        p.previous.next=p.next;
+        p.next.previous=p.previous;
+
+        p.next=null;
+        p.previous=null;
+
+        return p.value;
     }
 
     public T removeLast()
@@ -122,11 +140,13 @@ public class LinkedList<T> {
         return node.value;
     }
 
+    @Override
     public int size()
     {
         return size;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return size==0;
@@ -134,8 +154,8 @@ public class LinkedList<T> {
 
     private ListNode<T> getNode(int index)
     {
-        if(index>=size)
-            throw new IllegalArgumentException("maximum available index is "+(size-1));
+        if(index>=size||index<0)
+            throw new IllegalArgumentException("index "+index+" is inavailable");
 
         ListNode<T> p=head;
         int i=0;
@@ -148,6 +168,7 @@ public class LinkedList<T> {
         return p;
     }
 
+    @Override
     public T get(int index)
     {
         return getNode(index).value;

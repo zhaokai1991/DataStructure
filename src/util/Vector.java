@@ -1,9 +1,11 @@
 package util;
 
+import api.List;
+
 /**
  * Created by zhaokai on 16-6-14.
  */
-public class Vector<T> {
+public class Vector<T> implements List<T>{
 
     private static final int DEFAULT_CAPACITY=16;
 
@@ -43,6 +45,7 @@ public class Vector<T> {
         elements=newELements;
     }
 
+    @Override
     public void add(T element)
     {
         if(isFull())
@@ -51,7 +54,8 @@ public class Vector<T> {
         elements[size++]=element;
     }
 
-    public void add(int index,T element)
+    @Override
+    public void insert(int index,T element)
     {
         if(index>=size||index<0)
             throw new ArrayIndexOutOfBoundsException(index);
@@ -65,6 +69,7 @@ public class Vector<T> {
         elements[index]=element;
     }
 
+    @Override
     public T get(int index)
     {
         if(index>=size||index<0)
@@ -73,11 +78,13 @@ public class Vector<T> {
         return (T)elements[index];
     }
 
+    @Override
     public boolean isEmpty()
     {
         return size==0;
     }
 
+    @Override
     public T remove(int index)
     {
         if(index>=size||index<0)
@@ -94,6 +101,12 @@ public class Vector<T> {
         size--;
 
         return (T)removed;
+    }
+
+    @Override
+    public int size()
+    {
+        return size;
     }
 
 }
