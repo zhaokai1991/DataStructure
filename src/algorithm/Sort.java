@@ -119,4 +119,50 @@ public class Sort {
         mergeSort(array,0,n-1);
     }
 
+    private static int partition(int[] array,int left,int right)
+    {
+        int pivot=right;
+        int temp=array[pivot];
+
+        int p=left-1;
+
+        for(int i=left;i<=right-1;i++)
+        {
+            if(array[i]<pivot)
+            {
+                p++;
+                int t=array[i];
+                array[i]=array[p];
+                array[p]=t;
+            }
+        }
+
+        p++;
+        int t=array[pivot];
+        array[pivot]=array[p];
+        array[p]=t;
+
+        return p;
+    }
+
+    private static void quickSort(int[] array,int left,int right)
+    {
+        if(left<right)
+        {
+            int pivot=partition(array,left,right);
+            quickSort(array,left,pivot);
+            quickSort(array,pivot+1,right);
+        }
+    }
+
+    public static void quickSort(int[] array)
+    {
+        int n=array.length;
+
+        if(n==0)
+            return;
+
+        quickSort(array,0,n-1);
+    }
+
 }
