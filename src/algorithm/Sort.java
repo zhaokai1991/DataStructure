@@ -121,14 +121,13 @@ public class Sort {
 
     private static int partition(int[] array,int left,int right)
     {
-        int pivot=right;
-        int temp=array[pivot];
+        int temp=array[right];
 
         int p=left-1;
 
         for(int i=left;i<=right-1;i++)
         {
-            if(array[i]<pivot)
+            if(array[i]<temp)
             {
                 p++;
                 int t=array[i];
@@ -138,8 +137,8 @@ public class Sort {
         }
 
         p++;
-        int t=array[pivot];
-        array[pivot]=array[p];
+        int t=array[right];
+        array[right]=array[p];
         array[p]=t;
 
         return p;
@@ -150,7 +149,7 @@ public class Sort {
         if(left<right)
         {
             int pivot=partition(array,left,right);
-            quickSort(array,left,pivot);
+            quickSort(array,left,pivot-1);
             quickSort(array,pivot+1,right);
         }
     }

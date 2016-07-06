@@ -10,12 +10,9 @@ public class Main {
     private static final int _1MB=1024*1024;
 
     public static void main(String[] args) {
-        byte[] a1,a2,a3,a4;
-        a1=new byte[_1MB/4];
-        a2=new byte[_1MB/4];
-        a3=new byte[4*_1MB];
-        a4=null;
-        a4=new byte[4*_1MB];
+        int[] array=new int[]{54,2,75,4,8,9,52,65,97,16,12,83,28};
+        Sort.quickSort(array);
+        System.out.println(Arrays.toString(array));
     }
 }
 
